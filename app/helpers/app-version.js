@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from '../config/environment';
-import { shaRegExp, versionRegExp } from 'ember-cli-app-version/utils/regexp';
+import { shaRegExp, versionRegExp, semVersionRegExp } from 'ember-cli-app-version/utils/regexp';
 
 const {
   APP: {
@@ -16,7 +16,11 @@ export function appVersion(_, hash = {}) {
   if (hash.hideVersion) {
     return version.match(shaRegExp)[0];
   }
-
+  
+  if (hash.semVersion) {
+    return version.match(semVersionRegExp)[0];
+  }
+  
   return version;
 }
 
